@@ -230,6 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const successMessage = checkoutModal.querySelector('.success-message');
         const errorMessage = checkoutModal.querySelector('.error-message');
 
+<<<<<<< HEAD
         // Product quick checkout multi-price logic
         productCards.forEach(card => {
             const select = card.querySelector('.durian-size');
@@ -412,6 +413,12 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update showCheckoutModal to accept size and stripeLink
         function showCheckoutModal(productName, price, size, stripeLink) {
             if (!modalProductName || !modalProductPrice) return;
+=======
+        function showCheckoutModal(productName, price) {
+            if (!modalProductName || !modalProductPrice) return;
+            
+            // Format the price display appropriately based on currency
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
             let formattedPrice = '';
             try {
                 if (price && typeof price === 'string') {
@@ -426,11 +433,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (error) {
                 formattedPrice = price || 'Price unavailable';
+<<<<<<< HEAD
             }
             modalProductName.textContent = productName || 'Product';
             modalProductPrice.textContent = formattedPrice + (size ? ` (${size.toUpperCase()})` : '');
             checkoutModal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+=======
+                console.error('Error formatting price:', error);
+            }
+            
+            modalProductName.textContent = productName || 'Product';
+            modalProductPrice.textContent = formattedPrice;
+            checkoutModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
             setTimeout(() => {
                 const checkoutContent = checkoutModal.querySelector('.checkout-content');
                 if (checkoutContent) {
@@ -438,12 +456,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     checkoutContent.style.transform = 'translateY(0) scale(1)';
                 }
             }, 10);
+<<<<<<< HEAD
             if (loadingSpinner) loadingSpinner.style.display = 'none';
             if (successMessage) successMessage.style.display = 'none';
             if (errorMessage) errorMessage.style.display = 'none';
             const stripeButton = checkoutModal.querySelector('.stripe-proceed-btn');
             if (stripeButton) {
                 stripeButton.dataset.stripeLink = stripeLink || '';
+=======
+            
+            if (loadingSpinner) loadingSpinner.style.display = 'none';
+            if (successMessage) successMessage.style.display = 'none';
+            if (errorMessage) errorMessage.style.display = 'none';
+            
+            // Set the correct Stripe payment link based on product
+            const stripeButton = checkoutModal.querySelector('.stripe-proceed-btn');
+            if (stripeButton) {
+                const stripeLinks = {
+                    'Musang King': 'https://buy.stripe.com/bJe00keoUcaWaA70qD1Jm09',
+                    'Red Prawn/Ang bak': 'https://buy.stripe.com/7sYeVecgM7UG23Bddp1Jm0b',
+                    'D24 Classic': 'https://buy.stripe.com/bJefZi6Wsgrc7nV0qD1Jm0f',
+                    'Capri': 'https://buy.stripe.com/3cI6oI94A7UGeQngpB1Jm0d',
+                    'Golden Phoenix': 'https://buy.stripe.com/3cIbJ24Ok0se5fN0qD1Jm08',
+                    'Ganja D15': 'https://buy.stripe.com/4gM6oI4OkcaWeQna1d1Jm05',
+                    'Katak Pulu/D99': 'https://buy.stripe.com/3cI5kE6Ws2Am5fN1uH1Jm07',
+                    'Lanjiao Yuan/D88 Supreme': 'https://buy.stripe.com/9B6fZi2Gc0se0Zx7T51Jm06',
+                    '11 Susu': 'https://buy.stripe.com/8x27sM1C8ej4gYv4GT1Jm0a',
+                    'Khun Poh': 'https://buy.stripe.com/bJecN61C88YKfUr6P11Jm00',
+                    'Cheh Pui Kia': 'https://buy.stripe.com/cNi00k6Wsa2O5fN1uH1Jm0c',
+                    '604 Premium': 'https://buy.stripe.com/00weVegx2caW9w3gpB1Jm0e',
+                    'Mix and Match Gift Box': 'https://buy.stripe.com/bJe9AU80w4Iu6jRa1d1Jm04',
+                    'Durian Buffet': 'https://buy.stripe.com/00w28s94A1wicIfc9l1Jm01',
+                    'Bulk Sales': 'https://buy.stripe.com/bJeaEY80w8YKfUr2yL1Jm02'
+                };
+                
+                // Get the corresponding link or use default if not found
+                stripeButton.dataset.stripeLink = stripeLinks[productName] || 'https://buy.stripe.com/test_dRm8wR3x48x630g4N00Ba00';
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
             }
         }
 
@@ -471,6 +520,21 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
+<<<<<<< HEAD
+=======
+        const stripeCheckoutBtns = document.querySelectorAll('.stripe-checkout');
+        stripeCheckoutBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const productName = this.getAttribute('data-product');
+                const price = this.getAttribute('data-price');
+                
+                showCheckoutModal(productName, price);
+            });
+        });
+
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
         const stripeProceedBtn = checkoutModal.querySelector('.stripe-proceed-btn');
         if (stripeProceedBtn) {
             stripeProceedBtn.addEventListener('click', function() {
@@ -513,7 +577,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 try {
                     const productName = this.getAttribute('data-product') || 'durian products';
+<<<<<<< HEAD
                     const whatsappMessage = `Hi Ivan Lee! I would like to order ${productName/Quantity} from Islet Durians. Please provide more details about availability and delivery.`;
+=======
+                    const whatsappMessage = `Hi Ivan Lee! I would like to order ${productName} from Islet Durians. Please provide more details about availability and delivery.`;
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
                     const whatsappUrl = `https://wa.me/60165568420?text=${encodeURIComponent(whatsappMessage)}`;
                     
                     window.open(whatsappUrl, '_blank');
@@ -534,7 +602,11 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 const dateInput = document.querySelector('.date-input');
                 const selectedDate = dateInput && dateInput.value ? dateInput.value : '';
+<<<<<<< HEAD
                 let message = 'Hi Ivan Lee! I would like to book a farm tour at Islet Durians, Please let me know the availability.';
+=======
+                let message = 'Hi Ivan Lee! I would like to book a farm tour at Islet Durians.';
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
                 
                 if (selectedDate) {
                     message += ` I prefer the date: ${selectedDate}.`;
@@ -852,6 +924,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.body.addEventListener('mousedown', function() {
         document.body.classList.remove('keyboard-focus');
     });
+<<<<<<< HEAD
 
     // Add logic for package quick checkout
     const packageCards = document.querySelectorAll('.package-card');
@@ -867,4 +940,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+=======
+>>>>>>> c9bf0e40ef232fcca48928f67160af5f16b4e3e2
 });
