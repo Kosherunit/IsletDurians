@@ -867,4 +867,31 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+
+    // About section photo carousel
+    const aboutCarousel = document.querySelector('.about-carousel');
+    if (aboutCarousel) {
+        const images = aboutCarousel.querySelectorAll('.carousel-image');
+        let current = 0;
+        let intervalId;
+        function showImage(idx) {
+            images.forEach((img, i) => {
+                img.style.display = i === idx ? 'block' : 'none';
+            });
+        }
+        function nextImage() {
+            current = (current + 1) % images.length;
+            showImage(current);
+        }
+        function startCarousel() {
+            intervalId = setInterval(nextImage, 3500);
+        }
+        function stopCarousel() {
+            clearInterval(intervalId);
+        }
+        showImage(current);
+        startCarousel();
+        aboutCarousel.addEventListener('mouseenter', stopCarousel);
+        aboutCarousel.addEventListener('mouseleave', startCarousel);
+    }
 });
